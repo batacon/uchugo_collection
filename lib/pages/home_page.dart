@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:uchugo_collection/components/char_panel.dart';
+import 'package:uchugo_collection/components/completion_rate_section.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -11,9 +12,7 @@ class HomePage extends StatelessWidget {
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(80),
         child: AppBar(
-          title: SvgPicture.asset(
-            'assets/images/logo.svg',
-          ),
+          title: SvgPicture.asset('assets/images/logo.svg'),
           titleTextStyle: const TextStyle(
             color: Colors.black,
             fontSize: 20,
@@ -27,18 +26,7 @@ class HomePage extends StatelessWidget {
         padding: const EdgeInsets.symmetric(vertical: 32, horizontal: 16),
         child: ListView(
           children: [
-            const Text('コンプリート率'),
-            const SizedBox(height: 8),
-            // stateを使ってコンプリート率を表示する
-            const SizedBox(
-              height: 16,
-              width: double.infinity,
-              child: DecoratedBox(
-                decoration: BoxDecoration(
-                  color: Colors.blue,
-                ),
-              ),
-            ),
+            const CompletionRateSection(),
             const SizedBox(height: 40),
             const Text('50音', style: TextStyle(fontWeight: FontWeight.bold)),
             const SizedBox(height: 16),
@@ -74,7 +62,11 @@ class HomePage extends StatelessWidget {
   Widget _buildCharRow(List<String> chars) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: chars.map((char) => CharPanel(char)).toList(),
+      children: chars.map((char) {
+        if (char == '') return const SizedBox(width: 64);
+
+        return CharPanel(char);
+      }).toList(),
     );
   }
 }
