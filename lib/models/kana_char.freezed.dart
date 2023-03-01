@@ -100,8 +100,9 @@ class __$$_KanaCharCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_KanaChar implements _KanaChar {
-  const _$_KanaChar({required this.char, required this.checkedDate});
+class _$_KanaChar extends _KanaChar {
+  const _$_KanaChar({required this.char, required this.checkedDate})
+      : super._();
 
   @override
   final String char;
@@ -133,10 +134,11 @@ class _$_KanaChar implements _KanaChar {
       __$$_KanaCharCopyWithImpl<_$_KanaChar>(this, _$identity);
 }
 
-abstract class _KanaChar implements KanaChar {
+abstract class _KanaChar extends KanaChar {
   const factory _KanaChar(
       {required final String char,
       required final DateTime checkedDate}) = _$_KanaChar;
+  const _KanaChar._() : super._();
 
   @override
   String get char;
