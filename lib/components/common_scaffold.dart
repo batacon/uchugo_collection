@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:uchugo_collection/pages/history_page.dart';
 
-class CustomScaffold extends StatelessWidget {
+class CommonScaffold extends StatelessWidget {
   final Widget body;
 
-  const CustomScaffold({super.key, required this.body});
+  const CommonScaffold({super.key, required this.body});
 
   @override
   Widget build(BuildContext context) {
@@ -13,11 +13,6 @@ class CustomScaffold extends StatelessWidget {
       appBar: AppBar(
         title: SvgPicture.asset('assets/images/logo.svg'),
         automaticallyImplyLeading: false,
-        titleTextStyle: const TextStyle(
-          color: Colors.black,
-          fontSize: 20,
-          fontWeight: FontWeight.bold,
-        ),
         backgroundColor: Colors.white,
         elevation: 1,
         actions: [

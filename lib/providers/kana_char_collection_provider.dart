@@ -6,9 +6,24 @@ final checkedKanaCharsProvider = StateNotifierProvider.autoDispose<CheckedKanaCh
 });
 
 class CheckedKanaCharsProvider extends StateNotifier<List<KanaChar>> {
-  static const allCharsCount = 46;
+  static const List<List<String>> _allCharsList = [
+    ['あ', 'い', 'う', 'え', 'お'],
+    ['か', 'き', 'く', 'け', 'こ'],
+    ['さ', 'し', 'す', 'せ', 'そ'],
+    ['た', 'ち', 'つ', 'て', 'と'],
+    ['な', 'に', 'ぬ', 'ね', 'の'],
+    ['は', 'ひ', 'ふ', 'へ', 'ほ'],
+    ['ま', 'み', 'む', 'め', 'も'],
+    ['や', '', 'ゆ', '', 'よ'],
+    ['ら', 'り', 'る', 'れ', 'ろ'],
+    ['わ', '', 'を', '', 'ん'],
+  ];
 
   CheckedKanaCharsProvider() : super([]);
+
+  List<List<String>> get allCharsList => _allCharsList;
+
+  int get allCharsCount => _allCharsList.expand((row) => row).where((char) => char != '').length;
 
   int get completionRateInPercent => (state.length / allCharsCount * 100).floor();
 

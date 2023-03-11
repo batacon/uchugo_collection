@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:uchugo_collection/components/char_box.dart';
 import 'package:uchugo_collection/components/common_scaffold.dart';
+import 'package:uchugo_collection/components/history_list_item.dart';
 import 'package:uchugo_collection/models/kana_char.dart';
 import 'package:uchugo_collection/providers/kana_char_collection_provider.dart';
 
@@ -12,7 +11,7 @@ class HistoryPage extends ConsumerWidget {
   @override
   Widget build(final BuildContext context, final WidgetRef ref) {
     final checkedChars = ref.watch(checkedKanaCharsProvider);
-    return CustomScaffold(
+    return CommonScaffold(
       body: ListView(
         children: [
           _buildPageTitle(context),
@@ -30,13 +29,7 @@ class HistoryPage extends ConsumerWidget {
           icon: const Icon(Icons.arrow_back, color: Colors.black),
           onPressed: () => Navigator.of(context).pop(),
         ),
-        const Text(
-          'History',
-          style: TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
+        Text('History', style: Theme.of(context).textTheme.headline1),
         const SizedBox(width: 60),
       ],
     );
@@ -47,28 +40,7 @@ class HistoryPage extends ConsumerWidget {
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
       itemCount: checkedChars.length,
-      itemBuilder: (context, index) {
-        return ListTile(
-          leading: CharBox(char: checkedChars[index].char, size: 40),
-          title: Text(
-            checkedChars[index].checkedDateFormatted,
-            style: const TextStyle(fontWeight: FontWeight.bold),
-          ),
-          trailing: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              IconButton(
-                onPressed: () {},
-                icon: SvgPicture.asset('assets/icons/edit_icon.svg'),
-              ),
-              IconButton(
-                onPressed: () {},
-                icon: SvgPicture.asset('assets/icons/close_icon.svg'),
-              ),
-            ],
-          ),
-        );
-      },
+      itemBuilder: (context, index) => HistoryListItem(checkedChars[index]),
     );
   }
 }
