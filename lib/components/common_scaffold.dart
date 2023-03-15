@@ -8,7 +8,7 @@ class CommonScaffold extends StatelessWidget {
   const CommonScaffold({super.key, required this.body});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: SvgPicture.asset('assets/images/logo.svg'),

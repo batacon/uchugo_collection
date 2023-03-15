@@ -29,20 +29,20 @@ class CheckedKanaCharsProvider extends StateNotifier<List<KanaChar>> {
 
   double get completionRate => (state.length / allCharsCount * 100).floorToDouble() / 100;
 
-  bool isChecked(String char) => state.any((kanaChar) => kanaChar.char == char);
+  bool isChecked(final String char) => state.any((kanaChar) => kanaChar.char == char);
 
-  void toggleChecked(String char) {
-    isChecked(char) ? _uncheckChar(char) : _checkChar(char);
+  void toggleChecked(final String char) {
+    isChecked(char) ? uncheckChar(char) : checkChar(char);
   }
 
-  void _checkChar(String char) {
+  void checkChar(final String char) {
     state = [
       ...state,
       KanaChar(char: char, checkedDate: DateTime.now()),
     ];
   }
 
-  void _uncheckChar(String char) {
+  void uncheckChar(final String char) {
     state = state.where((kanaChar) => kanaChar.char != char).toList();
   }
 }

@@ -21,7 +21,7 @@ class HistoryPage extends ConsumerWidget {
     );
   }
 
-  Widget _buildPageTitle(BuildContext context) {
+  Widget _buildPageTitle(final BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -35,7 +35,7 @@ class HistoryPage extends ConsumerWidget {
     );
   }
 
-  Widget _buildHistoryList(List<KanaChar> checkedChars) {
+  Widget _buildHistoryList(final List<KanaChar> checkedChars) {
     return ListView.builder(
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),

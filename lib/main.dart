@@ -4,9 +4,7 @@ import 'package:uchugo_collection/pages/home_page.dart';
 
 void main() {
   runApp(
-    const ProviderScope(
-      child: MainApp(),
-    ),
+    const ProviderScope(child: MainApp()),
   );
 }
 
@@ -14,7 +12,7 @@ class MainApp extends StatelessWidget {
   const MainApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     return MaterialApp(
       title: '宇宙語図鑑',
       theme: ThemeData(

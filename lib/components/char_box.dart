@@ -13,7 +13,7 @@ class CharBox extends StatelessWidget {
   final String char;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     return Container(
       width: size,
       height: size,
@@ -28,10 +28,7 @@ class CharBox extends StatelessWidget {
         ],
       ),
       child: Center(
-        child: Text(
-          char,
-          style: const TextStyle(color: Colors.white),
-        ),
+        child: Text(char, style: const TextStyle(color: Colors.white)),
       ),
     );
   }

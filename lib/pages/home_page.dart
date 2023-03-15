@@ -10,6 +10,7 @@ class HomePage extends ConsumerWidget {
 
   @override
   Widget build(final BuildContext context, final WidgetRef ref) {
+    ref.watch(checkedKanaCharsProvider);
     final allCharsList = ref.watch(checkedKanaCharsProvider.notifier).allCharsList;
     return CommonScaffold(
       body: Padding(
@@ -36,7 +37,7 @@ class HomePage extends ConsumerWidget {
     );
   }
 
-  Widget _buildCharRow(List<String> chars) {
+  Widget _buildCharRow(final List<String> chars) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: chars.map((char) {

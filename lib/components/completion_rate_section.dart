@@ -4,6 +4,7 @@ import 'package:uchugo_collection/providers/kana_char_collection_provider.dart';
 
 class CompletionRateSection extends ConsumerWidget {
   static const _allKanaCharsCount = 46;
+
   const CompletionRateSection({super.key});
 
   @override
@@ -15,12 +16,12 @@ class CompletionRateSection extends ConsumerWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             const Text('コンプリート率'),
-            Text('${(completionRate(checkedKanaChars.length) * 100).floor()}%'),
+            Text('${(_completionRate(checkedKanaChars.length) * 100).floor()}%'),
           ],
         ),
         const SizedBox(height: 8),
         TweenAnimationBuilder(
-          tween: Tween<double>(begin: 0, end: completionRate(checkedKanaChars.length)),
+          tween: Tween<double>(begin: 0, end: _completionRate(checkedKanaChars.length)),
           duration: const Duration(milliseconds: 250),
           builder: (context, double value, _) {
             return ClipRRect(
@@ -38,7 +39,7 @@ class CompletionRateSection extends ConsumerWidget {
     );
   }
 
-  double completionRate(final int checkedKanaCharsLength) {
+  double _completionRate(final int checkedKanaCharsLength) {
     return (checkedKanaCharsLength / _allKanaCharsCount * 100).floorToDouble() / 100;
   }
 }
