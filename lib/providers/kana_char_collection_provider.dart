@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:uchugo_collection/models/kana_char.dart';
+import 'package:uchugo_collection/repositories/checked_chars_repository.dart';
 
 final checkedKanaCharsProvider = StateNotifierProvider.autoDispose<CheckedKanaCharsProvider, List<KanaChar>>((ref) {
   return CheckedKanaCharsProvider();
@@ -18,8 +19,13 @@ class CheckedKanaCharsProvider extends StateNotifier<List<KanaChar>> {
     ['ら', 'り', 'る', 'れ', 'ろ'],
     ['わ', '', 'を', '', 'ん'],
   ];
+  final CheckedCharsRepository _checkedCharsRepository = CheckedCharsRepository();
 
-  CheckedKanaCharsProvider() : super([]);
+  CheckedKanaCharsProvider() : super([]) {
+    _checkedCharsRepository.getCheckedChars().then((checkedChars) {
+      state = checkedChars;
+    });
+  }
 
   List<List<String>> get allCharsList => _allCharsList;
 
@@ -36,13 +42,13 @@ class CheckedKanaCharsProvider extends StateNotifier<List<KanaChar>> {
   }
 
   void checkChar(final String char) {
-    state = [
-      ...state,
-      KanaChar(char: char, checkedDate: DateTime.now()),
-    ];
+    final newKanaChar = KanaChar(char: char, checkedDate: DateTime.now());
+    state = [...state, newKanaChar];
+    _checkedCharsRepository.checkChar(newKanaChar);
   }
 
   void uncheckChar(final String char) {
     state = state.where((kanaChar) => kanaChar.char != char).toList();
+    _checkedCharsRepository.uncheckChar(char);
   }
 }

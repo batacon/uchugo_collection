@@ -11,5 +11,19 @@ class KanaChar with _$KanaChar {
     required DateTime checkedDate,
   }) = _KanaChar;
 
+  factory KanaChar.fromJson(Map<String, dynamic> json) {
+    return KanaChar(
+      char: json['char'] as String,
+      checkedDate: DateTime.parse(json['checkedDate'] as String),
+    );
+  }
+
   String get checkedDateFormatted => '${checkedDate.year}/${checkedDate.month}/${checkedDate.day}';
+
+  Map<String, dynamic> toJson() {
+    return {
+      'char': char,
+      'checkedDate': checkedDate.toIso8601String(),
+    };
+  }
 }
