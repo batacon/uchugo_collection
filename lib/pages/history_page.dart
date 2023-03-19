@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:uchugo_collection/components/common_scaffold.dart';
 import 'package:uchugo_collection/components/history_list_item.dart';
 import 'package:uchugo_collection/models/kana_char.dart';
@@ -29,18 +30,27 @@ class HistoryPage extends ConsumerWidget {
           icon: const Icon(Icons.arrow_back, color: Colors.black),
           onPressed: () => Navigator.of(context).pop(),
         ),
-        Text('History', style: Theme.of(context).textTheme.headline1),
+        Text('HISTORY', style: Theme.of(context).textTheme.headline1),
         const SizedBox(width: 60),
       ],
     );
   }
 
-  Widget _buildHistoryList(final List<KanaChar> checkedChars) {
-    return ListView.builder(
-      shrinkWrap: true,
-      physics: const NeverScrollableScrollPhysics(),
-      itemCount: checkedChars.length,
-      itemBuilder: (context, index) => HistoryListItem(checkedChars[index]),
+  Widget _buildHistoryList(final List<KanaChar> kanaChars) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      child: Column(
+        children: kanaChars.map((kanaChar) {
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              HistoryListItem(kanaChar, isOdd: kanaChars.indexOf(kanaChar) % 2 == 0),
+              if (kanaChar != kanaChars.last)
+                SvgPicture.asset('assets/icons/orange_dots_icon.svg', width: 40, height: 32),
+            ],
+          );
+        }).toList(),
+      ),
     );
   }
 }
