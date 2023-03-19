@@ -16,22 +16,9 @@ class CheckedCharsRepository {
     }).toList();
   }
 
-  Future<void> checkChar(final KanaChar kanaChar) async {
+  Future<void> saveAll(final List<KanaChar> kanaChars) async {
     final prefs = await _prefs;
-    final checkedCharsJson = prefs.getStringList(_checkedCharsKey) ?? [];
-    final kanaCharJson = jsonEncode(kanaChar.toJson());
-    final newCheckedCharsJson = [...checkedCharsJson, kanaCharJson];
+    final newCheckedCharsJson = kanaChars.map((kanaChar) => kanaChar.toJsonString).toList();
     prefs.setStringList(_checkedCharsKey, newCheckedCharsJson);
-  }
-
-  Future<void> uncheckChar(final String char) async {
-    final prefs = await _prefs;
-    final checkedCharsJson = prefs.getStringList(_checkedCharsKey) ?? [];
-    final newCheckedChars = checkedCharsJson
-        .map((kanaCharJson) => jsonDecode(kanaCharJson) as Map<String, dynamic>)
-        .where((kanaChar) => kanaChar['char'] != char)
-        .map((kanaChar) => jsonEncode(kanaChar))
-        .toList();
-    prefs.setStringList(_checkedCharsKey, newCheckedChars);
   }
 }

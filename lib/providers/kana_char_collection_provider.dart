@@ -29,11 +29,11 @@ class CheckedKanaCharsProvider extends StateNotifier<List<KanaChar>> {
 
   List<List<String>> get allCharsList => _allCharsList;
 
-  int get allCharsCount => _allCharsList.expand((row) => row).where((char) => char != '').length;
+  int get _allCharsCount => _allCharsList.expand((row) => row).where((char) => char != '').length;
 
-  int get completionRateInPercent => (state.length / allCharsCount * 100).floor();
+  int get completionRateInPercent => (state.length / _allCharsCount * 100).floor();
 
-  double get completionRate => (state.length / allCharsCount * 100).floorToDouble() / 100;
+  double get completionRate => (state.length / _allCharsCount * 100).floorToDouble() / 100;
 
   bool isChecked(final String char) => state.any((kanaChar) => kanaChar.char == char);
 
@@ -43,12 +43,25 @@ class CheckedKanaCharsProvider extends StateNotifier<List<KanaChar>> {
 
   void checkChar(final String char) {
     final newKanaChar = KanaChar(char: char, checkedDate: DateTime.now());
-    state = [...state, newKanaChar];
-    _checkedCharsRepository.checkChar(newKanaChar);
+    state = [newKanaChar, ...state];
+    _checkedCharsRepository.saveAll(state);
   }
 
   void uncheckChar(final String char) {
     state = state.where((kanaChar) => kanaChar.char != char).toList();
-    _checkedCharsRepository.uncheckChar(char);
+    _checkedCharsRepository.saveAll(state);
+  }
+
+  void updateCheckedChar(final KanaChar kanaChar, final DateTime checkedDate) {
+    final newKanaChar = kanaChar.copyWith(checkedDate: checkedDate);
+    state = state.map((kanaCharInState) {
+      return kanaCharInState.char == newKanaChar.char ? newKanaChar : kanaCharInState;
+    }).toList();
+    state = _sortedKanaCharsByDateDesc(state);
+    _checkedCharsRepository.saveAll(state);
+  }
+
+  List<KanaChar> _sortedKanaCharsByDateDesc(List<KanaChar> kanaChars) {
+    return kanaChars..sort((a, b) => b.checkedDate.compareTo(a.checkedDate));
   }
 }

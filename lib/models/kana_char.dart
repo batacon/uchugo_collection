@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'kana_char.freezed.dart';
@@ -20,7 +22,9 @@ class KanaChar with _$KanaChar {
 
   String get checkedDateFormatted => '${checkedDate.year}/${checkedDate.month}/${checkedDate.day}';
 
-  Map<String, dynamic> toJson() {
+  String get toJsonString => jsonEncode(toJson);
+
+  Map<String, dynamic> get toJson {
     return {
       'char': char,
       'checkedDate': checkedDate.toIso8601String(),
