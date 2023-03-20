@@ -19,7 +19,7 @@ class HomePage extends ConsumerWidget {
           children: [
             const CompletionRateSection(),
             const SizedBox(height: 40),
-            const Text('50音', style: TextStyle(fontWeight: FontWeight.bold)),
+            Text('50音', style: Theme.of(context).textTheme.headline3),
             const SizedBox(height: 16),
             Column(
               children: allCharsList.map((charRow) {

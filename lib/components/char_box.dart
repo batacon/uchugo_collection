@@ -19,6 +19,7 @@ class CharBox extends StatelessWidget {
       height: size,
       decoration: BoxDecoration(
         color: isChecked ? Colors.blue : Colors.grey[400],
+        borderRadius: const BorderRadius.all(Radius.circular(8)),
         boxShadow: const [
           BoxShadow(
             color: Color.fromRGBO(0, 0, 0, 0.25),
@@ -28,7 +29,10 @@ class CharBox extends StatelessWidget {
         ],
       ),
       child: Center(
-        child: Text(char, style: const TextStyle(color: Colors.white)),
+        child: Text(
+          char,
+          style: Theme.of(context).textTheme.headline3!.copyWith(color: Colors.white),
+        ),
       ),
     );
   }
