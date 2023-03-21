@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:uchugo_collection/constants/custom_color.dart';
 
 class CharBox extends StatelessWidget {
   const CharBox({
@@ -18,7 +19,7 @@ class CharBox extends StatelessWidget {
       width: size,
       height: size,
       decoration: BoxDecoration(
-        color: isChecked ? Colors.blue : Colors.grey[400],
+        color: isChecked ? CustomColor.primary : CustomColor.gray,
         borderRadius: const BorderRadius.all(Radius.circular(8)),
         boxShadow: const [
           BoxShadow(

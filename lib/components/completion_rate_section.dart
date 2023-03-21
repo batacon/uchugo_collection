@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:uchugo_collection/constants/custom_color.dart';
 import 'package:uchugo_collection/pages/history_page.dart';
 import 'package:uchugo_collection/providers/checked_kana_chars_provider.dart';
 
@@ -52,9 +53,9 @@ class CompletionRateSection extends ConsumerWidget {
         return ClipRRect(
           borderRadius: const BorderRadius.all(Radius.circular(2)),
           child: LinearProgressIndicator(
-            backgroundColor: Colors.orange,
-            valueColor: const AlwaysStoppedAnimation<Color>(Colors.blue),
-            minHeight: 28,
+            backgroundColor: CustomColor.accent,
+            valueColor: const AlwaysStoppedAnimation<Color>(CustomColor.primary),
+            minHeight: 20,
             value: value,
           ),
         );

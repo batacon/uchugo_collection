@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:uchugo_collection/constants/custom_color.dart';
 import 'package:uchugo_collection/providers/checked_kana_chars_provider.dart';
 import 'package:uchugo_collection/providers/selected_date_provider.dart';
 
@@ -72,11 +73,11 @@ class KanaCharDialog extends ConsumerWidget {
         padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(16),
-          color: Colors.grey.shade100,
+          color: CustomColor.grayLight,
         ),
         child: Row(
           children: [
-            const Icon(Icons.calendar_today_outlined, size: 16, color: Colors.blue),
+            const Icon(Icons.calendar_today_outlined, size: 16, color: CustomColor.primary),
             const SizedBox(width: 8),
             Text('${selectedDate.year}-${selectedDate.month}-${selectedDate.day}'),
           ],

@@ -21,7 +21,7 @@ class HomePage extends ConsumerWidget {
           child: Column(
             children: [
               const CompletionRateSection(),
-              const SizedBox(height: 40),
+              const SizedBox(height: 24),
               _buildCharsListSection(context, '50音', gojuonCharsList),
               const SizedBox(height: 4),
               _buildCharsListSection(context, '濁音&半濁音', dakuonHandakuonCharsList),

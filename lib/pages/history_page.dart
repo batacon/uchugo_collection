@@ -47,7 +47,7 @@ class HistoryPage extends ConsumerWidget {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              HistoryListItem(kanaChar, isOdd: kanaChars.indexOf(kanaChar) % 2 == 0),
+              HistoryListItem(kanaChar, isOdd: (kanaChars.indexOf(kanaChar) + 1).isOdd),
               if (kanaChar != kanaChars.last)
                 SvgPicture.asset('assets/icons/orange_dots_icon.svg', width: 40, height: 32),
             ],
