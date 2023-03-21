@@ -20,7 +20,7 @@ class HistoryListItem extends ConsumerWidget {
     return Row(
       children: [
         _buildPlanetIcon(),
-        const SizedBox(width: 16),
+        const SizedBox(width: 20),
         CharBox(char: _kanaChar.char, isChecked: true, size: 40),
         const SizedBox(width: 16),
         Expanded(

@@ -15,18 +15,20 @@ class HomePage extends ConsumerWidget {
     final dakuonHandakuonCharsList = ref.watch(checkedKanaCharsProvider.notifier).dakuonHandakuonCharsList;
     final yoonCharsList = ref.watch(checkedKanaCharsProvider.notifier).yoonCharsList;
     return CommonScaffold(
-      body: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 32, horizontal: 16),
-        child: ListView(
-          children: [
-            const CompletionRateSection(),
-            const SizedBox(height: 40),
-            _buildCharsListSection(context, '50音', gojuonCharsList),
-            const SizedBox(height: 4),
-            _buildCharsListSection(context, '濁音&半濁音', dakuonHandakuonCharsList),
-            const SizedBox(height: 4),
-            _buildCharsListSection(context, '拗音', yoonCharsList),
-          ],
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 32),
+          child: Column(
+            children: [
+              const CompletionRateSection(),
+              const SizedBox(height: 40),
+              _buildCharsListSection(context, '50音', gojuonCharsList),
+              const SizedBox(height: 4),
+              _buildCharsListSection(context, '濁音&半濁音', dakuonHandakuonCharsList),
+              const SizedBox(height: 4),
+              _buildCharsListSection(context, '拗音', yoonCharsList),
+            ],
+          ),
         ),
       ),
     );

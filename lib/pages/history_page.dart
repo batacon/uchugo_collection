@@ -23,22 +23,25 @@ class HistoryPage extends ConsumerWidget {
   }
 
   Widget _buildPageTitle(final BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.black),
-          onPressed: () => Navigator.of(context).pop(),
-        ),
-        Text('HISTORY', style: Theme.of(context).textTheme.headline1),
-        const SizedBox(width: 60),
-      ],
+    return Padding(
+      padding: const EdgeInsets.all(20),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          IconButton(
+            icon: const Icon(Icons.arrow_back, color: Colors.black),
+            onPressed: () => Navigator.of(context).pop(),
+          ),
+          Text('HISTORY', style: Theme.of(context).textTheme.headline1),
+          const SizedBox(width: 60),
+        ],
+      ),
     );
   }
 
   Widget _buildHistoryList(final List<KanaChar> kanaChars) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
+      padding: const EdgeInsets.only(left: 32, right: 16, bottom: 32),
       child: Column(
         children: kanaChars.map((kanaChar) {
           return Column(

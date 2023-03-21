@@ -10,25 +10,35 @@ class CommonScaffold extends StatelessWidget {
   @override
   Widget build(final BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: SvgPicture.asset('assets/images/logo.svg'),
-        automaticallyImplyLeading: false,
-        backgroundColor: Colors.white,
-        elevation: 1,
-        actions: [
-          IconButton(
-            onPressed: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) => const HistoryPage()),
-              );
-            },
-            icon: SvgPicture.asset('assets/icons/history_icon.svg'),
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(80),
+        child: Container(
+          padding: const EdgeInsets.only(top: 56, left: 16, right: 16, bottom: 12),
+          decoration: const BoxDecoration(
+            color: Colors.white,
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black12,
+                blurRadius: 4,
+              ),
+            ],
           ),
-          IconButton(
-            onPressed: () {},
-            icon: SvgPicture.asset('assets/icons/settings_icon.svg'),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              SvgPicture.asset('assets/images/logo.svg'),
+              IconButton(
+                onPressed: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => const HistoryPage()),
+                  );
+                },
+                icon: SvgPicture.asset('assets/icons/history_icon.svg'),
+              ),
+            ],
           ),
-        ],
+        ),
       ),
       body: body,
     );
