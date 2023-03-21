@@ -11,7 +11,9 @@ class HomePage extends ConsumerWidget {
   @override
   Widget build(final BuildContext context, final WidgetRef ref) {
     ref.watch(checkedKanaCharsProvider);
-    final allCharsList = ref.watch(checkedKanaCharsProvider.notifier).allCharsList;
+    final gojuonCharsList = ref.watch(checkedKanaCharsProvider.notifier).gojuonCharsList;
+    final dakuonHandakuonCharsList = ref.watch(checkedKanaCharsProvider.notifier).dakuonHandakuonCharsList;
+    final yoonCharsList = ref.watch(checkedKanaCharsProvider.notifier).yoonCharsList;
     return CommonScaffold(
       body: Padding(
         padding: const EdgeInsets.symmetric(vertical: 32, horizontal: 16),
@@ -19,21 +21,34 @@ class HomePage extends ConsumerWidget {
           children: [
             const CompletionRateSection(),
             const SizedBox(height: 40),
-            Text('50音', style: Theme.of(context).textTheme.headline3),
-            const SizedBox(height: 16),
-            Column(
-              children: allCharsList.map((charRow) {
-                return Column(
-                  children: [
-                    _buildCharRow(charRow),
-                    const SizedBox(height: 16),
-                  ],
-                );
-              }).toList(),
-            ),
+            _buildCharsListSection(context, '50音', gojuonCharsList),
+            const SizedBox(height: 4),
+            _buildCharsListSection(context, '濁音&半濁音', dakuonHandakuonCharsList),
+            const SizedBox(height: 4),
+            _buildCharsListSection(context, '拗音', yoonCharsList),
           ],
         ),
       ),
+    );
+  }
+
+  Widget _buildCharsListSection(final BuildContext context, final String title, final List<List<String>> charsList) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(title, style: Theme.of(context).textTheme.headline3),
+        const SizedBox(height: 16),
+        Column(
+          children: charsList.map((charRow) {
+            return Column(
+              children: [
+                _buildCharRow(charRow),
+                const SizedBox(height: 16),
+              ],
+            );
+          }).toList(),
+        ),
+      ],
     );
   }
 

@@ -7,7 +7,7 @@ final checkedKanaCharsProvider = StateNotifierProvider.autoDispose<CheckedKanaCh
 });
 
 class CheckedKanaCharsProvider extends StateNotifier<List<KanaChar>> {
-  static const List<List<String>> _allCharsList = [
+  static const List<List<String>> _gojuonCharsList = [
     ['あ', 'い', 'う', 'え', 'お'],
     ['か', 'き', 'く', 'け', 'こ'],
     ['さ', 'し', 'す', 'せ', 'そ'],
@@ -19,6 +19,35 @@ class CheckedKanaCharsProvider extends StateNotifier<List<KanaChar>> {
     ['ら', 'り', 'る', 'れ', 'ろ'],
     ['わ', '', 'を', '', 'ん'],
   ];
+
+  static const List<List<String>> _dakuonHandakuonCharsList = [
+    ['が', 'ぎ', 'ぐ', 'げ', 'ご'],
+    ['ざ', 'じ', 'ず', 'ぜ', 'ぞ'],
+    ['だ', 'ぢ', 'づ', 'で', 'ど'],
+    ['ば', 'び', 'ぶ', 'べ', 'ぼ'],
+    ['ぱ', 'ぴ', 'ぷ', 'ぺ', 'ぽ'],
+  ];
+
+  static const List<List<String>> _yoonCharsList = [
+    ['きゃ', '', 'きゅ', '', 'きょ'],
+    ['ぎゃ', '', 'ぎゅ', '', 'ぎょ'],
+    ['しゃ', '', 'しゅ', 'しぇ', 'しょ'],
+    ['じゃ', '', 'じゅ', 'じぇ', 'じょ'],
+    ['ちゃ', '', 'ちゅ', 'ちぇ', 'ちょ'],
+    ['にゃ', '', 'にゅ', '', 'にょ'],
+    ['ひゃ', '', 'ひゅ', '', 'ひょ'],
+    ['びゃ', '', 'びゅ', '', 'びょ'],
+    ['ぴゃ', '', 'ぴゅ', '', 'ぴょ'],
+    ['みゃ', '', 'みゅ', '', 'みょ'],
+    ['りゃ', '', 'りゅ', '', 'りょ'],
+  ];
+
+  static const List<List<String>> _allCharsList = [
+    ..._gojuonCharsList,
+    ..._dakuonHandakuonCharsList,
+    ..._yoonCharsList,
+  ];
+
   final CheckedCharsRepository _checkedCharsRepository = CheckedCharsRepository();
 
   CheckedKanaCharsProvider() : super([]) {
@@ -27,9 +56,13 @@ class CheckedKanaCharsProvider extends StateNotifier<List<KanaChar>> {
     });
   }
 
-  List<List<String>> get allCharsList => _allCharsList;
+  List<List<String>> get gojuonCharsList => _gojuonCharsList;
 
-  int get _allCharsCount => _allCharsList.expand((row) => row).where((char) => char != '').length;
+  List<List<String>> get dakuonHandakuonCharsList => _dakuonHandakuonCharsList;
+
+  List<List<String>> get yoonCharsList => _yoonCharsList;
+
+  int get _allCharsCount => _allCharsList.expand((row) => row).where((char) => char.isNotEmpty).length;
 
   int get completionRateInPercent => (state.length / _allCharsCount * 100).floor();
 
