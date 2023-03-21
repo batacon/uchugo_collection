@@ -37,26 +37,22 @@ class CheckedKanaCharsProvider extends StateNotifier<List<KanaChar>> {
 
   bool isChecked(final String char) => state.any((kanaChar) => kanaChar.char == char);
 
-  void toggleChecked(final String char) {
-    isChecked(char) ? uncheckChar(char) : checkChar(char);
-  }
-
-  void checkChar(final String char) {
-    final newKanaChar = KanaChar(char: char, checkedDate: DateTime.now());
-    state = [newKanaChar, ...state];
-    _checkedCharsRepository.saveAll(state);
-  }
+  DateTime checkedDateOf(final String char) => state.firstWhere((kanaChar) => kanaChar.char == char).checkedDate;
 
   void uncheckChar(final String char) {
     state = state.where((kanaChar) => kanaChar.char != char).toList();
     _checkedCharsRepository.saveAll(state);
   }
 
-  void updateCheckedChar(final KanaChar kanaChar, final DateTime checkedDate) {
-    final newKanaChar = kanaChar.copyWith(checkedDate: checkedDate);
-    state = state.map((kanaCharInState) {
-      return kanaCharInState.char == newKanaChar.char ? newKanaChar : kanaCharInState;
-    }).toList();
+  void addOrUpdateCheckedChar(final String char, final DateTime checkedDate) {
+    final newKanaChar = KanaChar(char: char, checkedDate: checkedDate);
+    if (!isChecked(char)) {
+      state = [newKanaChar, ...state];
+    } else {
+      state = state.map((kanaCharInState) {
+        return kanaCharInState.char == newKanaChar.char ? newKanaChar : kanaCharInState;
+      }).toList();
+    }
     state = _sortedKanaCharsByDateDesc(state);
     _checkedCharsRepository.saveAll(state);
   }

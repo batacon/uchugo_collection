@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:uchugo_collection/components/char_box.dart';
 import 'package:uchugo_collection/models/kana_char.dart';
-import 'package:uchugo_collection/providers/kana_char_collection_provider.dart';
+import 'package:uchugo_collection/providers/checked_kana_chars_provider.dart';
 
 class HistoryListItem extends ConsumerWidget {
   final KanaChar _kanaChar;
@@ -63,7 +63,7 @@ class HistoryListItem extends ConsumerWidget {
   void _updateChar(final WidgetRef ref, final DateTime? date) {
     if (date == null) return;
 
-    ref.watch(checkedKanaCharsProvider.notifier).updateCheckedChar(_kanaChar, date);
+    ref.watch(checkedKanaCharsProvider.notifier).addOrUpdateCheckedChar(_kanaChar.char, date);
   }
 
   Widget _buildDeleteButton(WidgetRef ref) {

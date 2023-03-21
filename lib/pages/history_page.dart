@@ -4,7 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:uchugo_collection/components/common_scaffold.dart';
 import 'package:uchugo_collection/components/history_list_item.dart';
 import 'package:uchugo_collection/models/kana_char.dart';
-import 'package:uchugo_collection/providers/kana_char_collection_provider.dart';
+import 'package:uchugo_collection/providers/checked_kana_chars_provider.dart';
 
 class HistoryPage extends ConsumerWidget {
   const HistoryPage({Key? key}) : super(key: key);

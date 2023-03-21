@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:uchugo_collection/components/char_panel.dart';
 import 'package:uchugo_collection/components/common_scaffold.dart';
 import 'package:uchugo_collection/components/completion_rate_section.dart';
-import 'package:uchugo_collection/providers/kana_char_collection_provider.dart';
+import 'package:uchugo_collection/components/kana_char_panel.dart';
+import 'package:uchugo_collection/providers/checked_kana_chars_provider.dart';
 
 class HomePage extends ConsumerWidget {
   const HomePage({super.key});
@@ -43,7 +43,7 @@ class HomePage extends ConsumerWidget {
       children: chars.map((char) {
         if (char == '') return const SizedBox(width: 64);
 
-        return CharPanel(char);
+        return KanaCharPanel(char);
       }).toList(),
     );
   }

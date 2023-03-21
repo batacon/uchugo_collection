@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:uchugo_collection/providers/kana_char_collection_provider.dart';
+import 'package:uchugo_collection/providers/checked_kana_chars_provider.dart';
 
 class CompletionRateSection extends ConsumerWidget {
   const CompletionRateSection({super.key});
