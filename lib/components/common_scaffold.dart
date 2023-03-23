@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:uchugo_collection/pages/history_page.dart';
+import 'package:uchugo_collection/pages/home_page.dart';
 
 class CommonScaffold extends StatelessWidget {
   final Widget body;
@@ -27,9 +28,18 @@ class CommonScaffold extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              SvgPicture.asset('assets/images/logo.svg'),
+              InkWell(
+                onTap: () {
+                  Navigator.of(context).popUntil((route) => route.isFirst);
+                  Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => const HomePage()),
+                  );
+                },
+                child: SvgPicture.asset('assets/images/logo.svg'),
+              ),
               IconButton(
                 onPressed: () {
+                  Navigator.of(context).popUntil((route) => route.isFirst);
                   Navigator.of(context).push(
                     MaterialPageRoute(builder: (context) => const HistoryPage()),
                   );
