@@ -99,6 +99,10 @@ class KanaCharDialog extends ConsumerWidget {
       ),
       onPressed: () {
         ref.watch(checkedKanaCharsProvider.notifier).addOrUpdateCheckedChar(_char, selectedDate);
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text('「$_char」を${_checkedDate == null ? '登録' : '修正'}しました'),
+          duration: const Duration(seconds: 3),
+        ));
         Navigator.pop(context);
       },
       child: Text(buttonLabel),

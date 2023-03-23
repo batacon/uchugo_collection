@@ -33,7 +33,7 @@ class HistoryListItem extends ConsumerWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             _buildEditButton(context, ref),
-            _buildDeleteButton(ref),
+            _buildDeleteButton(context, ref),
           ],
         ),
       ],
@@ -54,22 +54,34 @@ class HistoryListItem extends ConsumerWidget {
           initialDate: now,
           firstDate: now.subtract(const Duration(days: 365)),
           lastDate: now,
-        ).then((date) => _updateChar(ref, date));
+        ).then((date) => _updateChar(context, ref, date));
       },
       icon: SvgPicture.asset('assets/icons/edit_icon.svg'),
     );
   }
 
-  void _updateChar(final WidgetRef ref, final DateTime? date) {
+  void _updateChar(final BuildContext context, final WidgetRef ref, final DateTime? date) {
     if (date == null) return;
 
     ref.watch(checkedKanaCharsProvider.notifier).addOrUpdateCheckedChar(_kanaChar.char, date);
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text('「${_kanaChar.char}」の日付を${date.year}年${date.month}月${date.day}日に変更しました'),
+        duration: const Duration(seconds: 3),
+      ),
+    );
   }
 
-  Widget _buildDeleteButton(WidgetRef ref) {
+  Widget _buildDeleteButton(final BuildContext context, final WidgetRef ref) {
     return IconButton(
       onPressed: () {
         ref.watch(checkedKanaCharsProvider.notifier).uncheckChar(_kanaChar.char);
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('「${_kanaChar.char}」を削除しました'),
+            duration: const Duration(seconds: 3),
+          ),
+        );
       },
       icon: SvgPicture.asset('assets/icons/close_icon.svg'),
     );
