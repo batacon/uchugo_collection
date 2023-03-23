@@ -27,6 +27,15 @@ dev_dependencies:
   flutter_lints: ^2.0.0
   build_runner: ^2.3.3
   freezed: ^2.3.2
+  flutter_launcher_icons: ^0.12.0
+
+flutter_icons:
+  image_path: 'assets/app_icons/app_icon.png'
+  adaptive_icon_foreground: 'assets/app_icons/app_icon_adaptive_foreground.png'
+  adaptive_icon_background: '#FFFFFF'
+  android: true
+  ios: true
+  min_sdk_android: 21
 
 flutter:
   uses-material-design: true
