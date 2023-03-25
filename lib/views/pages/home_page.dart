@@ -6,6 +6,8 @@ import 'package:uchugo_collection/views/components/completion_rate_section.dart'
 import 'package:uchugo_collection/views/components/kana_char_panel.dart';
 
 class HomePage extends ConsumerWidget {
+  static const screenName = 'home_page';
+
   const HomePage({super.key});
 
   @override

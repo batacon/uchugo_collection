@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:uchugo_collection/firebase/firebase_analytics_helper.dart';
 import 'package:uchugo_collection/views/pages/history_page.dart';
 import 'package:uchugo_collection/views/pages/home_page.dart';
 
@@ -30,19 +31,25 @@ class CommonScaffold extends StatelessWidget {
             children: [
               InkWell(
                 onTap: () {
-                  Navigator.of(context).popUntil((route) => route.isFirst);
-                  Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => const HomePage()),
-                  );
+                  if (ModalRoute.of(context)!.settings.name != HomePage.screenName) {
+                    Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => const HomePage(),
+                      settings: const RouteSettings(name: HomePage.screenName),
+                    ));
+                    FirebaseAnalyticsHelper.sendScreenViewLog(HomePage.screenName);
+                  }
                 },
                 child: SvgPicture.asset('assets/images/logo.svg'),
               ),
               IconButton(
                 onPressed: () {
-                  Navigator.of(context).popUntil((route) => route.isFirst);
-                  Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => const HistoryPage()),
-                  );
+                  if (ModalRoute.of(context)!.settings.name != HistoryPage.screenName) {
+                    Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => const HistoryPage(),
+                      settings: const RouteSettings(name: HistoryPage.screenName),
+                    ));
+                    FirebaseAnalyticsHelper.sendScreenViewLog(HistoryPage.screenName);
+                  }
                 },
                 icon: SvgPicture.asset('assets/icons/history_icon.svg'),
               ),

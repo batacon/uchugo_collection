@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:uchugo_collection/constants/custom_color.dart';
+import 'package:uchugo_collection/firebase/firebase_analytics_helper.dart';
 import 'package:uchugo_collection/providers/checked_kana_chars_provider.dart';
 import 'package:uchugo_collection/views/pages/history_page.dart';
 
@@ -14,9 +15,11 @@ class CompletionRateSection extends ConsumerWidget {
     final completionRateInPercent = ref.watch(checkedKanaCharsProvider.notifier).completionRateInPercent;
     return InkWell(
       onTap: () {
-        Navigator.of(context).push(
-          MaterialPageRoute(builder: (context) => const HistoryPage()),
-        );
+        Navigator.of(context).push(MaterialPageRoute(
+          builder: (context) => const HistoryPage(),
+          settings: const RouteSettings(name: HistoryPage.screenName),
+        ));
+        FirebaseAnalyticsHelper.sendScreenViewLog(HistoryPage.screenName);
       },
       child: Column(
         children: [

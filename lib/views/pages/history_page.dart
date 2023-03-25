@@ -7,6 +7,8 @@ import 'package:uchugo_collection/views/components/common_scaffold.dart';
 import 'package:uchugo_collection/views/components/history_list_item.dart';
 
 class HistoryPage extends ConsumerWidget {
+  static const screenName = 'history_page';
+
   const HistoryPage({Key? key}) : super(key: key);
 
   @override

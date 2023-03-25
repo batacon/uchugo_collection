@@ -1,4 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:uchugo_collection/firebase/firebase_analytics_helper.dart';
 import 'package:uchugo_collection/models/kana_char.dart';
 import 'package:uchugo_collection/repositories/checked_chars_repository.dart';
 
@@ -75,16 +76,19 @@ class CheckedKanaCharsProvider extends StateNotifier<List<KanaChar>> {
   void uncheckChar(final String char) {
     state = state.where((kanaChar) => kanaChar.char != char).toList();
     _checkedCharsRepository.saveAll(state);
+    FirebaseAnalyticsHelper.logEvent('remove_checked_char', {'char': char});
   }
 
   void addOrUpdateCheckedChar(final String char, final DateTime checkedDate) {
     final newKanaChar = KanaChar(char: char, checkedDate: checkedDate);
     if (!isChecked(char)) {
       state = [newKanaChar, ...state];
+      FirebaseAnalyticsHelper.logEvent('add_checked_char', {'char': char});
     } else {
       state = state.map((kanaCharInState) {
         return kanaCharInState.char == newKanaChar.char ? newKanaChar : kanaCharInState;
       }).toList();
+      FirebaseAnalyticsHelper.logEvent('update_checked_char', {'char': char});
     }
     state = _sortedKanaCharsByDateDesc(state);
     _checkedCharsRepository.saveAll(state);
