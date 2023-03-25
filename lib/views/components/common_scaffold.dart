@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:uchugo_collection/pages/history_page.dart';
-import 'package:uchugo_collection/pages/home_page.dart';
+import 'package:uchugo_collection/views/pages/history_page.dart';
+import 'package:uchugo_collection/views/pages/home_page.dart';
 
 class CommonScaffold extends StatelessWidget {
   final Widget body;

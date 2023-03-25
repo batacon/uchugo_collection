@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:uchugo_collection/components/char_box.dart';
-import 'package:uchugo_collection/components/kana_char_dialog.dart';
 import 'package:uchugo_collection/providers/checked_kana_chars_provider.dart';
+import 'package:uchugo_collection/views/components/char_box.dart';
+import 'package:uchugo_collection/views/components/kana_char_dialog.dart';
 
 class KanaCharPanel extends ConsumerWidget {
   final String char;

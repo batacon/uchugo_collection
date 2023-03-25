@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:uchugo_collection/constants/custom_color.dart';
-import 'package:uchugo_collection/pages/history_page.dart';
 import 'package:uchugo_collection/providers/checked_kana_chars_provider.dart';
+import 'package:uchugo_collection/views/pages/history_page.dart';
 
 class CompletionRateSection extends ConsumerWidget {
   const CompletionRateSection({super.key});

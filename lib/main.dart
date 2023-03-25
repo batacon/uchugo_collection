@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:uchugo_collection/constants/custom_theme.dart';
-import 'package:uchugo_collection/pages/home_page.dart';
+import 'package:uchugo_collection/views/pages/home_page.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
