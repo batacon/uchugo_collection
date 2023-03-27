@@ -1,10 +1,13 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:uchugo_collection/firebase/firebase_analytics_helper.dart';
+import 'package:uchugo_collection/models/di_container.dart';
 import 'package:uchugo_collection/models/kana_char.dart';
 import 'package:uchugo_collection/repositories/checked_chars_repository.dart';
 
 final checkedKanaCharsProvider = StateNotifierProvider.autoDispose<CheckedKanaCharsProvider, List<KanaChar>>((ref) {
-  return CheckedKanaCharsProvider();
+  return CheckedKanaCharsProvider(
+    ref.watch(checkedCharsRepositoryProvider),
+  );
 });
 
 class CheckedKanaCharsProvider extends StateNotifier<List<KanaChar>> {
@@ -49,9 +52,9 @@ class CheckedKanaCharsProvider extends StateNotifier<List<KanaChar>> {
     ..._yoonCharsList,
   ];
 
-  final CheckedCharsRepository _checkedCharsRepository = CheckedCharsRepository();
+  final CheckedCharsRepository _checkedCharsRepository;
 
-  CheckedKanaCharsProvider() : super([]) {
+  CheckedKanaCharsProvider(this._checkedCharsRepository) : super([]) {
     _checkedCharsRepository.getCheckedChars().then((checkedChars) {
       state = checkedChars;
     });
@@ -81,15 +84,24 @@ class CheckedKanaCharsProvider extends StateNotifier<List<KanaChar>> {
 
   void addOrUpdateCheckedChar(final String char, final DateTime checkedDate) {
     final newKanaChar = KanaChar(char: char, checkedDate: checkedDate);
-    if (!isChecked(char)) {
-      state = [newKanaChar, ...state];
-      FirebaseAnalyticsHelper.logEvent('add_checked_char', {'char': char});
-    } else {
-      state = state.map((kanaCharInState) {
-        return kanaCharInState.char == newKanaChar.char ? newKanaChar : kanaCharInState;
-      }).toList();
-      FirebaseAnalyticsHelper.logEvent('update_checked_char', {'char': char});
-    }
+    isChecked(char) ? _updateCheckedChar(newKanaChar) : _addCheckedChar(newKanaChar);
+  }
+
+  void _addCheckedChar(final KanaChar newKanaChar) {
+    state = [newKanaChar, ...state];
+    _sortAndSaveState();
+    FirebaseAnalyticsHelper.logEvent('add_checked_char', {'char': newKanaChar.char});
+  }
+
+  void _updateCheckedChar(final KanaChar newKanaChar) {
+    state = state.map((kanaCharInState) {
+      return kanaCharInState.char == newKanaChar.char ? newKanaChar : kanaCharInState;
+    }).toList();
+    _sortAndSaveState();
+    FirebaseAnalyticsHelper.logEvent('update_checked_char', {'char': newKanaChar.char});
+  }
+
+  void _sortAndSaveState() {
     state = _sortedKanaCharsByDateDesc(state);
     _checkedCharsRepository.saveAll(state);
   }

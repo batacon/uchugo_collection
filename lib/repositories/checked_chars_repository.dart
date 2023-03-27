@@ -5,7 +5,10 @@ import 'package:uchugo_collection/models/kana_char.dart';
 
 class CheckedCharsRepository {
   static const String _checkedCharsKey = 'checkedChars';
-  final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
+
+  final Future<SharedPreferences> _prefs;
+
+  CheckedCharsRepository(this._prefs);
 
   Future<List<KanaChar>> getCheckedChars() async {
     final prefs = await _prefs;
