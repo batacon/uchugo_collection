@@ -34,7 +34,7 @@ class HistoryPage extends ConsumerWidget {
             icon: const Icon(Icons.arrow_back, color: Colors.black),
             onPressed: () => Navigator.of(context).pop(),
           ),
-          Text('HISTORY', style: Theme.of(context).textTheme.headline1),
+          Text('HISTORY', style: Theme.of(context).textTheme.displayLarge),
           const SizedBox(width: 60),
         ],
       ),

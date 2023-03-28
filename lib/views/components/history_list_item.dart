@@ -26,7 +26,7 @@ class HistoryListItem extends ConsumerWidget {
         Expanded(
           child: Text(
             _kanaChar.checkedDateFormatted,
-            style: Theme.of(context).textTheme.headline3,
+            style: Theme.of(context).textTheme.displaySmall,
           ),
         ),
         Row(

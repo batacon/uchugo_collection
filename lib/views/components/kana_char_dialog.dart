@@ -41,7 +41,7 @@ class KanaCharDialog extends ConsumerWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text('「$_char」って言った！', style: Theme.of(context).textTheme.headline2),
+        Text('「$_char」って言った！', style: Theme.of(context).textTheme.displayMedium),
         IconButton(
           onPressed: () => Navigator.pop(context),
           icon: const Icon(Icons.close),

@@ -32,7 +32,7 @@ class CharBox extends StatelessWidget {
       child: Center(
         child: Text(
           char,
-          style: Theme.of(context).textTheme.headline3!.copyWith(color: Colors.white),
+          style: Theme.of(context).textTheme.displaySmall!.copyWith(color: Colors.white),
         ),
       ),
     );

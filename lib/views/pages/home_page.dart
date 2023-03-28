@@ -40,7 +40,7 @@ class HomePage extends ConsumerWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(title, style: Theme.of(context).textTheme.headline3),
+        Text(title, style: Theme.of(context).textTheme.displaySmall),
         const SizedBox(height: 16),
         Column(
           children: charsList.map((charRow) {
