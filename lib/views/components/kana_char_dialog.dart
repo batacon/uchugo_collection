@@ -91,7 +91,7 @@ class KanaCharDialog extends ConsumerWidget {
     final WidgetRef ref,
     final DateTime selectedDate,
   ) {
-    final buttonLabel = _checkedDate == null ? '登録する' : '修正する';
+    final operation = _checkedDate == null ? '登録' : '修正';
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
@@ -100,12 +100,12 @@ class KanaCharDialog extends ConsumerWidget {
       onPressed: () {
         ref.watch(checkedKanaCharsProvider.notifier).addOrUpdateCheckedChar(_char, selectedDate);
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          content: Text('「$_char」を${_checkedDate == null ? '登録' : '修正'}しました'),
+          content: Text('「$_char」を$operationしました'),
           duration: const Duration(seconds: 3),
         ));
         Navigator.pop(context);
       },
-      child: Text(buttonLabel),
+      child: Text('$operationする'),
     );
   }
 }

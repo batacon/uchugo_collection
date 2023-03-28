@@ -106,7 +106,7 @@ class CheckedKanaCharsProvider extends StateNotifier<List<KanaChar>> {
     _checkedCharsRepository.saveAll(state);
   }
 
-  List<KanaChar> _sortedKanaCharsByDateDesc(List<KanaChar> kanaChars) {
+  List<KanaChar> _sortedKanaCharsByDateDesc(final List<KanaChar> kanaChars) {
     return kanaChars..sort((a, b) => b.checkedDate.compareTo(a.checkedDate));
   }
 }

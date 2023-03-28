@@ -10,10 +10,11 @@ import 'package:uchugo_collection/views/pages/home_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+
   FirebaseAnalyticsHelper.logEvent('app_start', {});
+
   runApp(const ProviderScope(child: MainApp()));
 }
 
